@@ -13,3 +13,17 @@
 #include <malloc.h>
 #include <memory.h>
 #include <tchar.h>
+#include <vector>
+#include <unordered_map>
+#include <memory>
+#include <algorithm>
+
+using namespace std;
+
+// Math
+#include "Math/Vector2.h"
+
+using Vector2D = Vector2<float>;
+
+// Objects
+#include "Objects/CircleCollider.h"

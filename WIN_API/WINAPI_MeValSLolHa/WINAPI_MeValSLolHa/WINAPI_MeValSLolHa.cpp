@@ -121,10 +121,25 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 //  WM_DESTROY  - 종료 메시지를 게시하고 반환합니다.
 //
 //
+
+shared_ptr<CircleCollider> circle = make_shared<CircleCollider>(Vector2D(500,500), 50);
+
+// Window Procedure : 윈도우가 진행되는 절차
+// Procedure ... 함수
+// 
+// 게임이라는 건물
+// HWND : Handle Window => 인력사무소장
+// message : 윈도우메시지... 윈도우창에서 할 일을 써놓는 곳.
+// HDC : Handle Device Context ... => 꾸미기 담당
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
     switch (message)
     {
+    case WM_MOUSEMOVE:
+    {
+        break;
+    }
+
     case WM_COMMAND:
         {
             int wmId = LOWORD(wParam);
@@ -146,7 +161,21 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         {
             PAINTSTRUCT ps;
             HDC hdc = BeginPaint(hWnd, &ps);
-            // TODO: 여기에 hdc를 사용하는 그리기 코드를 추가합니다...
+            
+            // 1. 클래스 Line, RectCollider 두개 만들기.
+            // 2. circle과 동일하게 Render함수를 이용하여 그리기.
+
+            // RectCollider
+            Rectangle(hdc, 0, 0, 100, 100);
+        
+            // 원 그리기
+            circle->Render(hdc);
+
+            // 선 그리기
+            // Line
+            MoveToEx(hdc, 0, 0, nullptr);
+            LineTo(hdc, 500, 500);
+
             EndPaint(hWnd, &ps);
         }
         break;
